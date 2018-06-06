@@ -4,26 +4,40 @@
 
 ### Steps to reproduce :scroll:
 
-1.
+1. Add new project for Xamarin.ios and add mvvmcross nuget package
 
-2.
+2. Make the changes in the AppDelegate file 
+public override bool FinishedLaunching(UIApplication apps, NSDictionary Options)
+{
+			Window = new UIWindow(UIScreen.MainScreen.Bounds);
+			var setup = new Setup(this, Window);
+      setup.Initialize();
+      var startup = Mvx.Resolve<IMvxAppStart>();
+      startup.Start();
+      Window.MakeKeyAndVisible();
+			return true;
+}
 
-3.
+3. Run the application on simulator iphone 7 plus
 
 
 ### Expected behavior :thinking:
-Tell us what should happen
+Application have to start the initial screen of the Application 
 
 ### Actual behavior :bug:
-Tell us what happens instead
+It raises the Exception on line --> setup.Initialize();
+Exception: System.TypeInitializationException has been thrown
+The type initializer for 'MvvmCross.Core.Platform.LogProviders.ConsoleLogProvider' threw an exception.
 
 ### Configuration :wrench:
 
-**Version:** 5.x
+**Version:** 
+core: .NET standard 2.0
+app : Xamarin.ios
 
 **Platform:** 
-- [ ] :iphone: iOS
-- [ ] :robot: Android
+- [*] :iphone: iOS
+- [] :robot: Android
 - [ ] :checkered_flag: WPF
 - [ ] :earth_americas: UWP
 - [ ] :apple: MacOS
